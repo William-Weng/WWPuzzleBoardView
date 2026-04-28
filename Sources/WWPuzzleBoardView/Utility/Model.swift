@@ -61,12 +61,6 @@ public extension WWPuzzleBoardView {
             self.correctCount = correctCount
             self.isSolved = isSolved
         }
-        
-        /// 空白初始狀態 (預設值)
-        /// - Returns: Self
-        static private func emptyBoardState() -> Self {
-            return .init(tiles: [], draggingTileID: nil, highlightedTargetTileID: nil, correctCount: 0, isSolved: false)
-        }
     }
     
     /// 拼圖盤面配置
@@ -88,18 +82,6 @@ public extension WWPuzzleBoardView {
             self.rows = rows
             self.cols = cols
         }
-        
-        /// 預設盤面配置 => 目前預設為 3 x 3，也就是常見的九宮格拼圖
-        /// - Returns: Self
-        static private func defaultValue() -> Self {
-            return .init(rows: 3, cols: 3)
-        }
-        
-        /// 拼圖總塊數 => 例如 3 x 3 = 9 塊、4 x 4 = 16 塊。
-        /// - Returns: Int
-        private func calculateTileCount() -> Int {
-            return rows * cols
-        }
     }
 }
 
@@ -114,5 +96,31 @@ extension WWPuzzleBoardView {
         let damping: CGFloat                    // 阻尼係數（0.0 ~ 1.0），值越小彈性越強，越接近 1.0 則動畫越平穩無震盪
         let initialVelocity: CGFloat            // 彈簧動畫的初始速度，數值越大起步衝勁越強
         let options: UIView.AnimationOptions    // 動畫選項（如 .curveEaseInOut、.allowUserInteraction 等），定義動畫的過渡曲線與行為
+    }
+}
+
+// MARK: - BoardState
+private extension WWPuzzleBoardView.BoardState {
+    
+    /// 空白初始狀態 (預設值)
+    /// - Returns: Self
+    static func emptyBoardState() -> Self {
+        return .init(tiles: [], draggingTileID: nil, highlightedTargetTileID: nil, correctCount: 0, isSolved: false)
+    }
+}
+
+// MARK: - Configuration
+private extension WWPuzzleBoardView.Configuration {
+    
+    /// 預設盤面配置 => 目前預設為 3 x 3，也就是常見的九宮格拼圖
+    /// - Returns: Self
+    static func defaultValue() -> Self {
+        return .init(rows: 3, cols: 3)
+    }
+    
+    /// 拼圖總塊數 => 例如 3 x 3 = 9 塊、4 x 4 = 16 塊。
+    /// - Returns: Int
+    func calculateTileCount() -> Int {
+        return rows * cols
     }
 }

@@ -77,35 +77,14 @@ public extension WWPuzzleBoardView {
     
     /// 將所有 tile 排回正確位置，並播放完成排序動畫
     func autoSort() {
-        
-        guard let currentState = boardState else { return }
-        
-        let newTiles = currentState.tiles.map { tile -> Tile in
-            var updatedTile = tile
-            updatedTile.currentIndex = updatedTile.correctIndex
-            return updatedTile
-        }
-        
-        let newState = makeBoardState(tiles: newTiles)
-        apply(newState, mode: .solvedSequence, event: .didAutoSort)
+        applySolvedState(mode: .solvedSequence, event: .didAutoSort)
     }
     
     /// 將所有 tile 直接排回正確位置
     /// - Parameter animated: 是否以互動動畫顯示整理過程
     func solve(animated: Bool = true) {
-        
-        guard let currentState = boardState else { return }
-        
-        let newTiles = currentState.tiles.map { tile -> Tile in
-            var updatedTile = tile
-            updatedTile.currentIndex = updatedTile.correctIndex
-            return updatedTile
-        }
-        
-        let newState = makeBoardState(tiles: newTiles)
         let mode: RenderMode = animated ? .interactive : .instant
-        
-        apply(newState, mode: mode, event: .didSolve)
+        applySolvedState(mode: mode, event: .didSolve)
     }
 }
 
@@ -280,7 +259,7 @@ private extension WWPuzzleBoardView {
 
 // MARK: - 小工具
 private extension WWPuzzleBoardView {
-
+        
     /// 根據目前狀態更新所有 tile 的高亮顯示，僅在目標高亮有變化時才執行
     /// - Parameters:
     ///   - state: 最新的 board 狀態
@@ -293,6 +272,24 @@ private extension WWPuzzleBoardView {
             guard let tileView = tileViews[tile.id] else { continue }
             tileView.setTargetHighlighted(state.highlightedTargetTileID == tile.id, animated: false)
         }
+    }
+    
+    /// 將目前盤面中的所有 tile 還原到正確位置，並依指定模式套用更新。
+    /// - Parameters:
+    ///   - mode: 更新畫面時使用的渲染模式。
+    ///   - event: 套用完成後要回傳給外部的事件。
+    func applySolvedState(mode: RenderMode, event: BoardEvent) {
+        
+        guard let currentState = boardState else { return }
+        
+        let newTiles = currentState.tiles.map { tile -> Tile in
+            var updatedTile = tile
+            updatedTile.currentIndex = updatedTile.correctIndex
+            return updatedTile
+        }
+        
+        let newState = makeBoardState(tiles: newTiles)
+        apply(newState, mode: mode, event: event)
     }
     
     /// 套用拼圖完成後的收尾動畫，讓完成瞬間有更明顯的視覺回饋 => 此方法不負責更新拼圖狀態，只在拼圖已完成後提供額外的視覺回饋。
@@ -372,7 +369,6 @@ private extension WWPuzzleBoardView {
     }
     
     /// 將目前正在拖曳的 tile 移到最上層，避免被其他 tile 遮住
-    ///
     /// - Parameter state: 最新的 board 狀態
     func bringDraggingTileToFront(using state: BoardState) {
         

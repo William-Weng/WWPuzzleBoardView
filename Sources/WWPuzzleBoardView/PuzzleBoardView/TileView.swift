@@ -51,6 +51,28 @@ public extension WWPuzzleBoardView {
 // MARK: - 視覺樣式設定
 extension WWPuzzleBoardView.TileView {
     
+    /// 切換目標高亮顯示（通常用於自動排序或吸附判定）=> 會改變陰影的強度、顏色，並縮小圖塊（縮小效果讓高亮更聚焦）=> 如果沒在拖曳才縮放，避免與拖曳效果衝突
+    func setTargetHighlighted(_ highlighted: Bool, animated: Bool) {
+        
+        let changes = {
+            
+            self.layer.shadowColor = (highlighted ? UIColor.systemBlue : UIColor.black).cgColor
+            self.layer.shadowOpacity = highlighted ? 0.28 : 0.10
+            self.layer.shadowRadius = highlighted ? 14 : 6
+            self.layer.shadowOffset = highlighted ? CGSize(width: 0, height: 8) : CGSize(width: 0, height: 3)
+            self.alpha = highlighted ? 0.45 : 1.0
+            
+            if (!self.isDragging) { self.transform = highlighted ? CGAffineTransform(scaleX: 0.97, y: 0.97) : .identity }
+        }
+        
+        if (!animated) { changes(); return }
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.12, delay: 0, options: [.curveEaseOut]) { changes() }
+    }
+}
+
+// MARK: - 視覺樣式設定
+private extension WWPuzzleBoardView.TileView {
+    
     /// 設定拖曳時的視覺樣式（放大、微透明）
     func applyDraggingStyle() {
         
@@ -83,24 +105,6 @@ extension WWPuzzleBoardView.TileView {
         
         if (!animated) { changes(); return }
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.15, delay: 0) { changes() }
-    }
-    
-    /// 切換目標高亮顯示（通常用於自動排序或吸附判定）=> 會改變陰影的強度、顏色，並縮小圖塊（縮小效果讓高亮更聚焦）=> 如果沒在拖曳才縮放，避免與拖曳效果衝突
-    func setTargetHighlighted(_ highlighted: Bool, animated: Bool) {
-        
-        let changes = {
-            
-            self.layer.shadowColor = (highlighted ? UIColor.systemBlue : UIColor.black).cgColor
-            self.layer.shadowOpacity = highlighted ? 0.28 : 0.10
-            self.layer.shadowRadius = highlighted ? 14 : 6
-            self.layer.shadowOffset = highlighted ? CGSize(width: 0, height: 8) : CGSize(width: 0, height: 3)
-            self.alpha = highlighted ? 0.45 : 1.0
-            
-            if (!self.isDragging) { self.transform = highlighted ? CGAffineTransform(scaleX: 0.97, y: 0.97) : .identity }
-        }
-        
-        if (!animated) { changes(); return }
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.12, delay: 0, options: [.curveEaseOut]) { changes() }
     }
 }
 

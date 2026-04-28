@@ -58,7 +58,6 @@ extension WWPuzzleBoardView {
     }
 }
 
-
 // MARK: - AnimationStyle
 extension WWPuzzleBoardView.AnimationStyle {
     
@@ -93,7 +92,7 @@ extension WWPuzzleBoardView.BoardAnimationStyle {
     }
 }
 
-// MARK: - 小工具
+// MARK: - BoardAnimationStyle
 private extension WWPuzzleBoardView.BoardAnimationStyle {
     
     /// 立即套用畫面變化，不建立動畫物件，適合初始化或同步狀態

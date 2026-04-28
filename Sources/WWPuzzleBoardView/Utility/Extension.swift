@@ -24,7 +24,7 @@ extension UIImage {
 
         let renderer = UIGraphicsImageRenderer(size: size, format: format)
         let normalizeImage = renderer.image { _ in
-            UIImage(cgImage: cgImage, scale: scale, orientation: .up).draw(in: CGRect(origin: .zero, size: size))
+            UIImage(cgImage: cgImage, scale: scale, orientation: .up).draw(in: .init(origin: .zero, size: size))
         }
         
         return normalizeImage
