@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/c39b9124-a85e-47d9-a799-db663f8bd147
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWPuzzleBoardView", .upToNextMinor(from: "1.0.1"))
+    .package(url: "https://github.com/William-Weng/WWPuzzleBoardView", .upToNextMinor(from: "1.0.2"))
 ]
 ```
 
