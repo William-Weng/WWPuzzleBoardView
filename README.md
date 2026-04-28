@@ -12,7 +12,7 @@
 
 ## 📷 [效果預覽](https://peterpanswift.github.io/iphone-bezels/)
 
-![](https://github.com/user-attachments/assets/879fb65b-3c06-4e9e-b028-bfd24d65fef2)
+[![](https://github.com/user-attachments/assets/9aff409e-8da1-40ae-aa4c-5c586206a559)](https://freepngimg.com/png/28746-mario-bros-photos)
 
 https://github.com/user-attachments/assets/c39b9124-a85e-47d9-a799-db663f8bd147
 
