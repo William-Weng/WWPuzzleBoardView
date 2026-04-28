@@ -113,58 +113,15 @@ public extension WWPuzzleBoardView {
 extension WWPuzzleBoardView: WWPuzzleBoardView.TileViewDelegate {
     
     func tileViewDidBeginDragging(_ tileView: TileView) {
-        
-        guard let currentState = boardState else { return }
-        
-        let newState = makeBoardState(tiles: currentState.tiles, draggingTileID: tileView.tileID, highlightedTargetTileID: nil)
-        apply(newState, mode: .interactive, event: .didBeginDragging(tileID: tileView.tileID))
+        tileViewDidBeginDragging(at: tileView)
     }
     
     func tileViewDidChangeDragging(_ tileView: TileView) {
-        
-        guard let currentState = boardState else { return }
-        
-        let targetCellIndex = cellIndex(containing: tileView.center)
-        let targetTileID = currentState.tiles.first(where: { $0.currentIndex == targetCellIndex })?.id
-        let newState = makeBoardState(tiles: currentState.tiles, draggingTileID: tileView.tileID, highlightedTargetTileID: targetTileID)
-        
-        apply(newState, mode: .interactive, event: .didChangeDragging(tileID: tileView.tileID, targetCellIndex: targetCellIndex))
+        tileViewDidChangeDragging(at: tileView)
     }
     
     func tileViewDidEndDragging(_ tileView: TileView) {
-        
-        guard let currentState = boardState else { return }
-        
-        let targetCellIndex = cellIndex(containing: tileView.center)
-        
-        guard let sourceTile = currentState.tiles.first(where: { $0.id == tileView.tileID }),
-              let targetTile = currentState.tiles.first(where: { $0.currentIndex == targetCellIndex })
-        else {
-            return
-        }
-        
-        let newTiles = currentState.tiles.map { tile -> Tile in
-            
-            var updatedTile = tile
-            
-            if tile.id == sourceTile.id {
-                updatedTile.currentIndex = targetTile.currentIndex
-            } else if tile.id == targetTile.id {
-                updatedTile.currentIndex = sourceTile.currentIndex
-            }
-            
-            return updatedTile
-        }
-        
-        let newState = makeBoardState(tiles: newTiles)
-        
-        apply(newState, mode: .interactive, event: .didEndDragging(tileID: tileView.tileID, targetCellIndex: targetCellIndex))
-        
-        if newState.isSolved {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                self.applySolvedAppearance()
-            }
-        }
+        tileViewDidEndDragging(at: tileView)
     }
 }
 
@@ -256,6 +213,68 @@ private extension WWPuzzleBoardView {
         let row = min(max(Int(point.y / tileSize.height), 0), configuration.rows - 1)
         
         return row * configuration.cols + col
+    }
+}
+
+// MARK: - TileViewDelegate
+private extension WWPuzzleBoardView {
+    
+    /// 更新開始拖曳的狀態，並通知外部 delegate
+    func tileViewDidBeginDragging(at tileView: TileView) {
+        
+        guard let currentState = boardState else { return }
+        
+        let newState = makeBoardState(tiles: currentState.tiles, draggingTileID: tileView.tileID, highlightedTargetTileID: nil)
+        apply(newState, mode: .interactive, event: .didBeginDragging(tileID: tileView.tileID))
+    }
+    
+    /// 根據拖曳中的 tile 目前中心點，計算目標格子並更新高亮狀態
+    func tileViewDidChangeDragging(at tileView: TileView) {
+        
+        guard let currentState = boardState else { return }
+        
+        let targetCellIndex = cellIndex(containing: tileView.center)
+        let targetTileID = currentState.tiles.first(where: { $0.currentIndex == targetCellIndex })?.id
+        let newState = makeBoardState(tiles: currentState.tiles, draggingTileID: tileView.tileID, highlightedTargetTileID: targetTileID)
+        
+        apply(newState, mode: .interactive, event: .didChangeDragging(tileID: tileView.tileID, targetCellIndex: targetCellIndex))
+    }
+    
+    /// 在拖曳結束時，將來源 tile 與目標格的 tile 交換位置，並更新 board state
+    func tileViewDidEndDragging(at tileView: TileView) {
+        
+        guard let currentState = boardState else { return }
+        
+        let targetCellIndex = cellIndex(containing: tileView.center)
+        
+        guard let sourceTile = currentState.tiles.first(where: { $0.id == tileView.tileID }),
+              let targetTile = currentState.tiles.first(where: { $0.currentIndex == targetCellIndex })
+        else {
+            return
+        }
+        
+        let newTiles = currentState.tiles.map { tile -> Tile in
+            
+            var updatedTile = tile
+            
+            if tile.id == sourceTile.id {
+                updatedTile.currentIndex = targetTile.currentIndex
+            } else if tile.id == targetTile.id {
+                updatedTile.currentIndex = sourceTile.currentIndex
+            }
+            
+            return updatedTile
+        }
+        
+        let newState = makeBoardState(tiles: newTiles)
+        
+        apply(newState, mode: .interactive, event: .didEndDragging(tileID: tileView.tileID, targetCellIndex: targetCellIndex))
+        
+        if newState.isSolved {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                self.applySolvedAppearance()
+            }
+        }
     }
 }
 

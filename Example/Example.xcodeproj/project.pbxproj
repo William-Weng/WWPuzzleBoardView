@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		811F532B2F9F309D00787FFE /* WWPuzzleBoardView in Frameworks */ = {isa = PBXBuildFile; productRef = 811F532A2F9F309D00787FFE /* WWPuzzleBoardView */; };
-		815BBDFE2FA093A800CB172E /* WWPuzzleBoardView in Frameworks */ = {isa = PBXBuildFile; productRef = 815BBDFD2FA093A800CB172E /* WWPuzzleBoardView */; };
+		815BBE012FA09A0600CB172E /* WWPuzzleBoardView in Frameworks */ = {isa = PBXBuildFile; productRef = 815BBE002FA09A0600CB172E /* WWPuzzleBoardView */; };
+		815BBE042FA09B8600CB172E /* WWPuzzleBoardView in Frameworks */ = {isa = PBXBuildFile; productRef = 815BBE032FA09B8600CB172E /* WWPuzzleBoardView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				815BBDFE2FA093A800CB172E /* WWPuzzleBoardView in Frameworks */,
+				815BBE042FA09B8600CB172E /* WWPuzzleBoardView in Frameworks */,
+				815BBE012FA09A0600CB172E /* WWPuzzleBoardView in Frameworks */,
 				811F532B2F9F309D00787FFE /* WWPuzzleBoardView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +88,8 @@
 			name = Example;
 			packageProductDependencies = (
 				811F532A2F9F309D00787FFE /* WWPuzzleBoardView */,
-				815BBDFD2FA093A800CB172E /* WWPuzzleBoardView */,
+				815BBE002FA09A0600CB172E /* WWPuzzleBoardView */,
+				815BBE032FA09B8600CB172E /* WWPuzzleBoardView */,
 			);
 			productName = Example;
 			productReference = 817EE1FE2EB1FA050036B57C /* Example.app */;
@@ -117,7 +120,7 @@
 			mainGroup = 817EE1F52EB1FA050036B57C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				815BBDFC2FA093A800CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */,
+				815BBE022FA09B8600CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 817EE1FF2EB1FA050036B57C /* Products */;
@@ -361,12 +364,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		815BBDFC2FA093A800CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */ = {
+		815BBE022FA09B8600CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWPuzzleBoardView";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -376,9 +379,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWPuzzleBoardView;
 		};
-		815BBDFD2FA093A800CB172E /* WWPuzzleBoardView */ = {
+		815BBE002FA09A0600CB172E /* WWPuzzleBoardView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 815BBDFC2FA093A800CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */;
+			productName = WWPuzzleBoardView;
+		};
+		815BBE032FA09B8600CB172E /* WWPuzzleBoardView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 815BBE022FA09B8600CB172E /* XCRemoteSwiftPackageReference "WWPuzzleBoardView" */;
 			productName = WWPuzzleBoardView;
 		};
 /* End XCSwiftPackageProductDependency section */
