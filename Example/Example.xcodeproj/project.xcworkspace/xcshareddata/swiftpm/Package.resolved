@@ -1,0 +1,15 @@
+{
+  "originHash" : "d80e67acc4d8733a2c27964d8cd629e974d3a98785e662f2b8892b2b88c0bc82",
+  "pins" : [
+    {
+      "identity" : "wwpuzzleboardview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWPuzzleBoardView",
+      "state" : {
+        "revision" : "fcccd2d92d8668d38b907e52ab82253758451bd2",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
