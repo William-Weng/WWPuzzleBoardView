@@ -12,9 +12,9 @@
 
 ## 📷 [效果預覽](https://peterpanswift.github.io/iphone-bezels/)
 
-[![](https://github.com/user-attachments/assets/9aff409e-8da1-40ae-aa4c-5c586206a559)](https://freepngimg.com/png/28746-mario-bros-photos)
+[![](https://github.com/user-attachments/assets/dff4426e-ddd5-4832-845f-3d92660710eb)](https://freepngimg.com/png/28746-mario-bros-photos)
 
-https://github.com/user-attachments/assets/c39b9124-a85e-47d9-a799-db663f8bd147
+https://github.com/user-attachments/assets/0c50cad9-2ad9-4b61-996d-3a72c2cfbba7
 
 <div align="center">
 
@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/c39b9124-a85e-47d9-a799-db663f8bd147
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWPuzzleBoardView", .upToNextMinor(from: "1.0.2"))
+    .package(url: "https://github.com/William-Weng/WWPuzzleBoardView", .upToNextMinor(from: "1.0.3"))
 ]
 ```
 

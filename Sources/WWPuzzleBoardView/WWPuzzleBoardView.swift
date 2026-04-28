@@ -13,7 +13,7 @@ public final class WWPuzzleBoardView: UIView {
     public weak var delegate: WWPuzzleBoardView.Delegate?               // 拼圖看板的事件代理，用來回傳拖曳與互動狀態
     public var autoSortAnimationStyle: AnimationStyle = .manualLike     // 自動排序時使用的動畫風格設定
     
-    private var configuration: Configuration = .init(rows: 3, cols: 3)  // 拼圖盤面配置 (3*3)
+    private var configuration: Configuration = .default                 // 拼圖盤面配置 (3*3)
     
     private(set) var imageAsset: ImageAsset?                            // 目前拼圖使用的圖片資源
     public private(set) var boardState: BoardState?                     // 當前的拼圖狀態

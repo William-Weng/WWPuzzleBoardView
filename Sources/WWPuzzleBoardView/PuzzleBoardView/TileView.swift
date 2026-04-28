@@ -70,44 +70,6 @@ extension WWPuzzleBoardView.TileView {
     }
 }
 
-// MARK: - 視覺樣式設定
-private extension WWPuzzleBoardView.TileView {
-    
-    /// 設定拖曳時的視覺樣式（放大、微透明）
-    func applyDraggingStyle() {
-        
-        isDragging = true
-        
-        let changes = {
-            self.transform = CGAffineTransform(scaleX: 1.04, y: 1.04)
-            self.alpha = 0.97
-            self.layer.shadowOpacity = 0.22
-            self.layer.shadowRadius = 12
-            self.layer.shadowOffset = CGSize(width: 0, height: 8)
-        }
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.12, delay: 0) { changes() }
-    }
-    
-    /// 重置為正常狀態
-    func resetVisualStyle(animated: Bool) {
-        
-        isDragging = false
-        
-        let changes = {
-            self.transform = .identity
-            self.alpha = 1.0
-            self.layer.shadowColor = UIColor.black.cgColor
-            self.layer.shadowOpacity = 0.10
-            self.layer.shadowRadius = 6
-            self.layer.shadowOffset = CGSize(width: 0, height: 3)
-        }
-        
-        if (!animated) { changes(); return }
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.15, delay: 0) { changes() }
-    }
-}
-
 // MARK: - 手勢處理
 private extension WWPuzzleBoardView.TileView {
     
