@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWPuzzleBoardView",
       "state" : {
-        "revision" : "87ee1b4676378937fecd3a8da16dad98a2802479",
-        "version" : "1.0.1"
+        "revision" : "3494e3d406fc0b2596816f4c9c849a321b5c3a71",
+        "version" : "1.0.2"
       }
     }
   ],
